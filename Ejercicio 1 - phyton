@@ -1,0 +1,39 @@
+import random
+import time
+
+def generate_random_array(size):
+    random_array = [random.randint(1, 1000) for _ in range(size)]
+    return random_array
+
+def print_array(arr):
+    print(" ".join(map(str, arr)))
+
+def sequential_search(arr, target):
+    for i, num in enumerate(arr):
+        if num == target:
+            return i
+    return -1
+
+def main():
+    random_array = generate_random_array(1000)
+
+    print("Arreglo generado aleatoriamente:")
+    print_array(random_array)
+
+    target_value = random_array[0]
+    index = sequential_search(random_array, target_value)
+    print(f"\nBúsqueda secuencial del elemento {target_value}: Encontrado en la posición {index if index != -1 else 'Elemento no encontrado'}")
+
+    start_time = time.time()
+    random_array.sort()
+    end_time = time.time()
+    print("\nArreglo ordenado:")
+    print_array(random_array)
+    print(f"\nTiempo de ejecución de la ordenación: {end_time - start_time} segundos")
+
+    target_value_after_sort = random_array[0]
+    index_after_sort = sequential_search(random_array, target_value_after_sort)
+    print(f"\nBúsqueda secuencial del elemento {target_value_after_sort} en el arreglo ordenado: Encontrado en la posición {index_after_sort if index_after_sort != -1 else 'Elemento no encontrado'}")
+
+if __name__ == "__main__":
+    main()
