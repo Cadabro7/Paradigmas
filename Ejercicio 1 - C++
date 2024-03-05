@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+
+std::vector<int> generateRandomArray(int size) {
+    std::vector<int> arr;
+    srand(time(0));
+    for (int i = 0; i < size; ++i) {
+        arr.push_back(rand() % 1000 + 1);
+    }
+    return arr;
+}
+
+void printArray(const std::vector<int>& arr) {
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+}
+
+int sequentialSearch(const std::vector<int>& arr, int target) {
+    for (size_t i = 0; i < arr.size(); ++i) {
+        if (arr[i] == target) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    
+    std::vector<int> randomArray = generateRandomArray(1000);
+
+    std::cout << "Arreglo generado aleatoriamente:" << std::endl;
+    printArray(randomArray);
+
+    int targetValue = randomArray[0];
+    int index = sequentialSearch(randomArray, targetValue);
+    std::cout << "\nBúsqueda secuencial del elemento " << targetValue << ": Encontrado en la posición " << (index != -1 ? std::to_string(index) : "Elemento no encontrado") << std::endl;
+
+    clock_t startTime = clock();
+    std::sort(randomArray.begin(), randomArray.end());
+    clock_t endTime = clock();
+    std::cout << "\nArreglo ordenado:" << std::endl;
+    printArray(randomArray);
+    std::cout << "\nTiempo de ejecución de la ordenación: " << double(endTime - startTime) / CLOCKS_PER_SEC << " segundos" << std::endl;
+
+    int targetValueAfterSort = randomArray[0];
+    int indexAfterSort = sequentialSearch(randomArray, targetValueAfterSort);
+    std::cout << "\nBúsqueda secuencial del elemento " << targetValueAfterSort << " en el arreglo ordenado: Encontrado en la posición " << (indexAfterSort != -1 ? std::to_string(indexAfterSort) : "Elemento no encontrado") << std::endl;
+
+    return 0;
+}
