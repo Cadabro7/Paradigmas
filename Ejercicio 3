@@ -1,0 +1,150 @@
+#include <stdio.h>
+
+// Declaración de funciones
+float suma(float a, float b) {
+    return a + b;
+}
+
+float resta(float a, float b) {
+    return a - b;
+}
+
+float multiplicacion(float a, float b) {
+    return a * b;
+}
+
+float division(float a, float b) {
+    if (b != 0)
+        return a / b;
+    else {
+        printf("Error: división por cero\n");
+        return 0;
+    }
+}
+
+float potencia(float base, int exponente) {
+    float resultado = 1;
+    for (int i = 0; i < exponente; i++) {
+        resultado *= base;
+    }
+    return resultado;
+}
+
+float raizCuadrada(float a) {
+    if (a >= 0)
+        return sqrt(a);
+    else {
+        printf("Error: no se puede calcular la raíz cuadrada de un número negativo\n");
+        return 0;
+    }
+}
+
+float seno(float a) {
+    return sin(a);
+}
+
+float coseno(float a) {
+    return cos(a);
+}
+
+float tangente(float a) {
+    return tan(a);
+}
+
+float logaritmo(float a) {
+    if (a > 0)
+        return log(a);
+    else {
+        printf("Error: no se puede calcular el logaritmo de un número menor o igual a cero\n");
+        return 0;
+    }
+}
+
+// Función principal
+int main() {
+    int opcion;
+    float a, b, resultado;
+    int exponente;
+
+    printf("Calculadora en C\n");
+    printf("1. Suma\n");
+    printf("2. Resta\n");
+    printf("3. Multiplicación\n");
+    printf("4. División\n");
+    printf("5. Potencia\n");
+    printf("6. Raíz Cuadrada\n");
+    printf("7. Seno\n");
+    printf("8. Coseno\n");
+    printf("9. Tangente\n");
+    printf("10. Logaritmo\n");
+    printf("Seleccione la operación que desea realizar: ");
+    scanf("%d", &opcion);
+
+    switch (opcion) {
+        case 1:
+            printf("Ingrese dos números para sumar: ");
+            scanf("%f %f", &a, &b);
+            resultado = suma(a, b);
+            printf("El resultado de la suma es: %.2f\n", resultado);
+            break;
+        case 2:
+            printf("Ingrese dos números para restar: ");
+            scanf("%f %f", &a, &b);
+            resultado = resta(a, b);
+            printf("El resultado de la resta es: %.2f\n", resultado);
+            break;
+        case 3:
+            printf("Ingrese dos números para multiplicar: ");
+            scanf("%f %f", &a, &b);
+            resultado = multiplicacion(a, b);
+            printf("El resultado de la multiplicación es: %.2f\n", resultado);
+            break;
+        case 4:
+            printf("Ingrese dos números para dividir: ");
+            scanf("%f %f", &a, &b);
+            resultado = division(a, b);
+            printf("El resultado de la división es: %.2f\n", resultado);
+            break;
+        case 5:
+            printf("Ingrese la base y el exponente para calcular la potencia: ");
+            scanf("%f %d", &a, &exponente);
+            resultado = potencia(a, exponente);
+            printf("El resultado de la potencia es: %.2f\n", resultado);
+            break;
+        case 6:
+            printf("Ingrese un número para calcular la raíz cuadrada: ");
+            scanf("%f", &a);
+            resultado = raizCuadrada(a);
+            printf("El resultado de la raíz cuadrada es: %.2f\n", resultado);
+            break;
+        case 7:
+            printf("Ingrese un número para calcular el seno: ");
+            scanf("%f", &a);
+            resultado = seno(a);
+            printf("El resultado del seno es: %.2f\n", resultado);
+            break;
+        case 8:
+            printf("Ingrese un número para calcular el coseno: ");
+            scanf("%f", &a);
+            resultado = coseno(a);
+            printf("El resultado del coseno es: %.2f\n", resultado);
+            break;
+        case 9:
+            printf("Ingrese un número para calcular la tangente: ");
+            scanf("%f", &a);
+            resultado = tangente(a);
+            printf("El resultado de la tangente es: %.2f\n", resultado);
+            break;
+        case 10:
+            printf("Ingrese un número para calcular el logaritmo: ");
+            scanf("%f", &a);
+            resultado = logaritmo(a);
+            printf("El resultado del logaritmo es: %.2f\n", resultado);
+            break;
+        default:
+            printf("Opción no válida\n");
+            break;
+    }
+
+    return 0;
+}
