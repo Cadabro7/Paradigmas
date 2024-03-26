@@ -1,0 +1,6 @@
+lista = [3, 2, 7, 10, 6, 9, 12, 15, 18, 21, 24, 22, 25, 27, 30, 32]
+
+divisibles_entre_3 = list(filter(lambda x: x % 3 == 0, lista))
+
+print(divisibles_entre_3)
+
