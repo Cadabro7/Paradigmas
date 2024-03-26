@@ -1,0 +1,7 @@
+cadena = "Hola, buenas tardes"
+
+cadena = cadena.lower()
+
+vocales = list(filter(lambda x: x in 'aeiou', cadena))
+
+print(vocales)
