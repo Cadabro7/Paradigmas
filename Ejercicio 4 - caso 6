@@ -1,0 +1,5 @@
+entrada = ['sat', 'bat', 'cat', 'mat']
+
+salida = list(map(lambda x: list(x), entrada))
+
+print(salida)
