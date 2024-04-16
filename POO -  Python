@@ -1,0 +1,54 @@
+class Persona:
+    def __init__(self, nombre, edad, direccion, telefono, correo, sexo):
+        self.nombre = nombre
+        self.edad = edad
+        self.direccion = direccion
+        self.telefono = telefono
+        self.correo = correo
+        self.sexo = sexo
+
+    # Getters y Setters
+    def get_nombre(self):
+        return self.nombre
+
+    def set_nombre(self, nombre):
+        self.nombre = nombre
+
+    def get_edad(self):
+        return self.edad
+
+    def set_edad(self, edad):
+        self.edad = edad
+
+    def get_direccion(self):
+        return self.direccion
+
+    def set_direccion(self, direccion):
+        self.direccion = direccion
+
+    def get_telefono(self):
+        return self.telefono
+
+    def set_telefono(self, telefono):
+        self.telefono = telefono
+
+    def get_correo(self):
+        return self.correo
+
+    def set_correo(self, correo):
+        self.correo = correo
+   
+    def get_sexo(self):
+        return self.sexo
+
+        def set_sexo(self, sexo):
+        self.sexo = sexo
+
+# Ejemplo de uso
+persona = Persona("Juan", 30, "Calle 123", "123456789", "juan@gmail.com", "Masculino")
+print("Nombre:", persona.get_nombre())
+print("Edad:", persona.get_edad())
+print("Dirección:", persona.get_direccion())
+print("Teléfono:", persona.get_telefono())
+print("Correo:", persona.get_correo())
+print("sexo:", persona.get_sexo())
