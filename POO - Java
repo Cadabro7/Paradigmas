@@ -1,0 +1,87 @@
+public class Persona {
+    private String nombre;
+    private int edad;
+    private String direccion;
+    private String telefono;
+    private String correo;
+    private String sexo;
+    private String nacionalidad;
+
+    public Persona(String nombre, int edad, String direccion, String telefono, String correo, String sexo, String nacionalidad) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.sexo = sexo;
+        this.nacionalidad = nacionalidad;
+    }
+
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public static void main(String[] args) {
+        Persona persona = new Persona("Juan", 30, "Calle 123", "123456789", "juan@gmail.com", "Masculino", "Mexicana");
+        System.out.println("Nombre: " + persona.getNombre());
+        System.out.println("Edad: " + persona.getEdad());
+        System.out.println("Dirección: " + persona.getDireccion());
+        System.out.println("Teléfono: " + persona.getTelefono());
+        System.out.println("Correo: " + persona.getCorreo());
+        System.out.println("Sexo: " + persona.getSexo());
+        System.out.println("Nacionalidad: " + persona.getNacionalidad());
+    }
+}
