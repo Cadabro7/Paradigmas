@@ -22,10 +22,8 @@ class HexagonoRegular:
     def getColor(self):
         return self.__color
 
-# Crear un objeto HexagonoRegular
 hexagono = HexagonoRegular("azul", 5, 4)
 
-# Obtener y mostrar el área y el perímetro
 area_hexagono = hexagono.getArea()
 perimetro_hexagono = hexagono.getPerimetro()
 
