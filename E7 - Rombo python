@@ -1,0 +1,32 @@
+import math
+
+class Rombo:
+    def __init__(self, color, lado, DiagonalMayor, DiagonalMenor):
+        self.__color = color
+        self.__lado = lado
+        self.__DiagonalMayor = DiagonalMayor
+        self.__DiagonalMenor = DiagonalMenor
+
+    def __area(self):
+        return (self.__DiagonalMayor * self.__DiagonalMenor)/2
+
+    def __perimetro(self):
+        return 4 * self.__lado
+
+    def getArea(self):
+        return self.__area()
+
+    def getPerimetro(self):
+        return self.__perimetro()
+
+    def getColor(self):
+        return self.__color
+
+rombo = Rombo("morado", 5, 8, 14)
+
+area_rombo = rombo.getArea()
+perimetro_rombo = rombo.getPerimetro()
+
+print(f"Color del rombo: {rombo.getColor()}")
+print(f"Área del rombo: {area_rombo}")
+print(f"Perímetro del rombo: {perimetro_rombo}")
