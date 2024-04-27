@@ -1,0 +1,34 @@
+import math
+
+class HexagonoRegular:
+    def __init__(self, color, lado, apotema):
+        self.__color = color
+        self.__lado = lado
+        self.__apotema = apotema
+
+    def __area(self):
+        perimetro = 6 * self.__lado
+        return (perimetro * self.__apotema)/2
+
+    def __perimetro(self):
+        return 6 * self.__lado
+
+    def getArea(self):
+        return self.__area()
+
+    def getPerimetro(self):
+        return self.__perimetro()
+
+    def getColor(self):
+        return self.__color
+
+# Crear un objeto HexagonoRegular
+hexagono = HexagonoRegular("azul", 5, 4)
+
+# Obtener y mostrar el área y el perímetro
+area_hexagono = hexagono.getArea()
+perimetro_hexagono = hexagono.getPerimetro()
+
+print(f"Color del hexágono: {hexagono.getColor()}")
+print(f"Área del hexágono: {area_hexagono}")
+print(f"Perímetro del hexágono: {perimetro_hexagono}")
