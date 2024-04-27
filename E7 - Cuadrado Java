@@ -2,7 +2,7 @@ public class Cuadrado{
     private String color;
     private double lado;
     
-    public Circulo(String color, double lado){
+    public Cuadrado(String color, double lado){
         this.color=color;
         this.lado=lado;
     }
