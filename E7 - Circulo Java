@@ -1,24 +1,40 @@
-public class Circulo{
+public class Circulo {
     private String color;
     private double radio;
-    
-    public Circulo(String color, double radio){
-        this.color=color;
-        this.radio=radio;
+
+    public Circulo(String color, double radio) {
+        this.color = color;
+        this.radio = radio;
     }
-    private double area(){
-        return Math.PI * Math.pow(radio,2);
+
+    private double area() {
+        return Math.PI * Math.pow(radio, 2);
     }
-    private double perimetro(){
+
+    private double perimetro() {
         return 2 * Math.PI * radio;
     }
-    public double getArea(){
+
+    public double getArea() {
         return area();
     }
-    public double getPerimetro(){
+
+    public double getPerimetro() {
         return perimetro();
     }
-    public double getColor(){
+
+    public String getColor() {
         return color;
+    }
+
+    public static void main(String[] args) {
+        Circulo circulo = new Circulo("Azul", 5);
+
+        double area_circulo = circulo.getArea();
+        double perimetro_circulo = circulo.getPerimetro();
+
+        System.out.println("Color del círculo: " + circulo.getColor());
+        System.out.println("Área del círculo: " + area_circulo);
+        System.out.println("Perímetro del círculo: " + perimetro_circulo);
     }
 }
