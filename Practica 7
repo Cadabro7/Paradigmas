@@ -1,0 +1,56 @@
+import math
+import random
+
+class Punto3D:
+    def __init__(self, x=0.0, y=0.0, z=0.0):
+        self.__x = x
+        self.__y = y
+        self.__z = z
+
+    def get_x(self):
+        return self.__x
+
+    def set_x(self, x):
+        self.__x = x
+
+    def get_y(self):
+        return self.__y
+
+    def set_y(self, y):
+        self.__y = y
+
+    def get_z(self):
+        return self.__z
+
+    def set_z(self, z):
+        self.__z = z
+
+    def distancia(self, otro_punto):
+        distancia_x = self.__x - otro_punto.get_x()
+        distancia_y = self.__y - otro_punto.get_y()
+        distancia_z = self.__z - otro_punto.get_z()
+        return math.sqrt(distancia_x**2 + distancia_y**2 + distancia_z**2)
+
+if __name__ == "__main__":
+    puntos = [Punto3D() for _ in range(10)]
+
+    for punto in puntos:
+        punto.set_x(random.random() * 10)
+        punto.set_y(random.random() * 10)
+        punto.set_z(random.random() * 10)
+
+    menor_distancia = float('inf')
+    punto1_index = -1
+    punto2_index = -1
+
+    for i in range(len(puntos)):
+        for j in range(i + 1, len(puntos)):
+            distancia = puntos[i].distancia(puntos[j])
+            if distancia < menor_distancia:
+                menor_distancia = distancia
+                punto1_index = i
+                punto2_index = j
+
+    print(f"La menor distancia es {menor_distancia} entre los puntos:")
+    print(f"Punto 1: ({puntos[punto1_index].get_x()}, {puntos[punto1_index].get_y()}, {puntos[punto1_index].get_z()})")
+    print(f"Punto 2: ({puntos[punto2_index].get_x()}, {puntos[punto2_index].get_y()}, {puntos[punto2_index].get_z()})")
