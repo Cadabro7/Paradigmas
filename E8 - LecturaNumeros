@@ -1,0 +1,68 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+public class LecturaNumeros extends BufferedReader {
+
+    public LecturaNumeros() {
+        super(new InputStreamReader(System.in));
+    }
+
+    public LecturaNumeros(Reader r) {
+        super(r);
+    }
+
+    public int readInt() throws IOException {
+        String line = this.readLine();
+        return Integer.parseInt(line);
+    }
+
+    public int readInt(String mensaje) throws IOException {
+        System.out.print(mensaje);
+        return readInt();
+    }
+
+    public Integer readInteger() throws IOException {
+        String line = this.readLine();
+        return Integer.valueOf(line);
+    }
+
+    public double readDouble() throws IOException {
+        String line = this.readLine();
+        return Double.parseDouble(line);
+    }
+
+    public double readDouble(String mensaje) throws IOException {
+        System.out.print(mensaje);
+        return readDouble();
+    }
+
+    public static void main(String[] args) {
+        try {
+            LecturaNumeros ln = new LecturaNumeros();
+
+            System.out.println("Por favor, introduce los siguientes números:");
+
+            int num1 = ln.readInt("Introduce el primer número entero: ");
+            int num2 = ln.readInt("Introduce el segundo número entero: ");
+
+            Integer num3 = ln.readInteger();
+
+            double num4 = ln.readDouble("Introduce un número decimal (double): ");
+
+            Double num5 = ln.readDouble("Introduce otro número decimal (Double): ");
+
+            System.out.println("Números introducidos:");
+            System.out.println("Primer entero (int): " + num1);
+            System.out.println("Segundo entero (int): " + num2);
+            System.out.println("Entero (Integer): " + num3);
+            System.out.println("Decimal (double): " + num4);
+            System.out.println("Decimal (Double): " + num5);
+        } catch (IOException e) {
+            System.err.println("Error de entrada/salida: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error: formato de número inválido.");
+        }
+    }
+}
