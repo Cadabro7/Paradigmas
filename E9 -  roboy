@@ -1,0 +1,52 @@
+class Robot:
+    def __init__(self, grid):
+        self.grid = grid
+
+    def find_path(self):
+        if not self.grid:
+            return None
+
+        rows = len(self.grid)
+        cols = len(self.grid[0])
+
+        def is_valid_move(row, col):
+            return 0 <= row < rows and 0 <= col < cols and self.grid[row][col] != 1
+
+        def find_path_recursive(row, col, path):
+            if row == rows - 1 and col == cols - 1:
+                return True
+
+            if is_valid_move(row, col + 1):
+                path.append((row, col + 1))
+                if find_path_recursive(row, col + 1, path):
+                    return True
+                path.pop()
+
+            if is_valid_move(row + 1, col):
+                path.append((row + 1, col))
+                if find_path_recursive(row + 1, col, path):
+                    return True
+                path.pop()
+
+            return False
+
+        path = [(0, 0)]
+        if find_path_recursive(0, 0, path):
+            return path
+        else:
+            return None
+
+
+grid = [
+    [0, 0, 0, 0],
+    [0, 1, 1, 0],
+    [0, 0, 0, 0],
+    [1, 1, 0, 0]
+]
+
+robot = Robot(grid)
+path = robot.find_path()
+if path:
+    print("Path found:", path)
+else:
+    print("No path found")
