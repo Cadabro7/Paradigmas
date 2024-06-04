@@ -1,0 +1,125 @@
+public interface Figure {
+    String getColor();
+    double perimeter();
+    double area();
+}
+
+public class Triangle implements Figure {
+    private String color;
+    private double side1, side2, side3;
+
+    public Triangle(String color, double side1, double side2, double side3) {
+        this.color = color;
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
+    @Override
+    public double perimeter() {
+        return side1 + side2 + side3;
+    }
+
+    @Override
+    public double area() {
+        double s = perimeter() / 2;
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+}
+
+public class Circle implements Figure {
+    private String color;
+    private double radius;
+
+    public Circle(String color, double radius) {
+        this.color = color;
+        this.radius = radius;
+    }
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Rectangle implements Figure {
+    private String color;
+    private double length, width;
+
+    public Rectangle(String color, double length, double width) {
+        this.color = color;
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * (length + width);
+    }
+
+    @Override
+    public double area() {
+        return length * width;
+    }
+}
+
+public class Hexagon implements Figure {
+    private String color;
+    private double side;
+
+    public Hexagon(String color, double side) {
+        this.color = color;
+        this.side = side;
+    }
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
+    @Override
+    public double perimeter() {
+        return 6 * side;
+    }
+
+    @Override
+    public double area() {
+        return (3 * Math.sqrt(3) / 2) * side * side;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Figure[] shapes = {
+            new Triangle("red", 3, 4, 5),
+            new Circle("blue", 10),
+            new Rectangle("green", 4, 6),
+            new Hexagon("yellow", 2)
+        };
+
+        for (Figure shape : shapes) {
+            System.out.println(shape.getClass().getSimpleName() + " - Color: " + shape.getColor() +
+                               ", Perimeter: " + shape.perimeter() + ", Area: " + shape.area());
+        }
+    }
+}
