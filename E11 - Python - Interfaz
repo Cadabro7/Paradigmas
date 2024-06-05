@@ -1,125 +1,84 @@
-public interface Figura {
-    String getColor();
-    double perimetro();
-    double area();
-}
+from abc import ABC, abstractmethod
 
-public class Triangulo implements Figura {
-    private String color;
-    private double lado1, lado2, lado3;
+class Figure(ABC):
+    def __init__(self, color: str):
+        self.color = color
 
-    public Triangulo(String color, double lado1, double lado2, double lado3) {
-        this.color = color;
-        this.lado1 = lado1;
-        this.lado2 = lado2;
-        this.lado3 = lado3;
-    }
+    def getColor(self) -> str:
+        return self.color
 
-    @Override
-    public String getColor() {
-        return color;
-    }
+    @abstractmethod
+    def perimeter(self) -> float:
+        pass
 
-    @Override
-    public double perimetro() {
-        return lado1 + lado2 + lado3;
-    }
+    @abstractmethod
+    def area(self) -> float:
+        pass
 
-    @Override
-    public double area() {
-        double s = perimetro() / 2;
-        return Math.sqrt(s * (s - lado1) * (s - lado2) * (s - lado3));
-    }
-}
+import math
 
-public class Circulo implements Figura {
-    private String color;
-    private double radio;
+class Triangle(Figure):
+    def __init__(self, color: str, side1: float, side2: float, side3: float):
+        super().__init__(color)
+        self.side1 = side1
+        self.side2 = side2
+        self.side3 = side3
 
-    public Circulo(String color, double radio) {
-        this.color = color;
-        this.radio = radio;
-    }
+    def perimeter(self) -> float:
+        return self.side1 + self.side2 + self.side3
 
-    @Override
-    public String getColor() {
-        return color;
-    }
+    def area(self) -> float:
+        s = self.perimeter() / 2
+        return math.sqrt(s * (s - self.side1) * (s - self.side2) * (s - self.side3))
 
-    @Override
-    public double perimetro() {
-        return 2 * Math.PI * radio;
-    }
+import math
 
-    @Override
-    public double area() {
-        return Math.PI * radio * radio;
-    }
-}
+class Circle(Figure):
+    def __init__(self, color: str, radius: float):
+        super().__init__(color)
+        self.radius = radius
 
-public class Rectangulo implements Figura {
-    private String color;
-    private double largo, ancho;
+    def perimeter(self) -> float:
+        return 2 * math.pi * self.radius
 
-    public Rectangulo(String color, double largo, double ancho) {
-        this.color = color;
-        this.largo = largo;
-        this.ancho = ancho;
-    }
+    def area(self) -> float:
+        return math.pi * self.radius ** 2
 
-    @Override
-    public String getColor() {
-        return color;
-    }
+class Rectangle(Figure):
+    def __init__(self, color: str, length: float, width: float):
+        super().__init__(color)
+        self.length = length
+        self.width = width
 
-    @Override
-    public double perimetro() {
-        return 2 * (largo + ancho);
-    }
+    def perimeter(self) -> float:
+        return 2 * (self.length + self.width)
 
-    @Override
-    public double area() {
-        return largo * ancho;
-    }
-}
+    def area(self) -> float:
+        return self.length * self.width
 
-public class Hexagono implements Figura {
-    private String color;
-    private double lado;
+import math
 
-    public Hexagono(String color, double lado) {
-        this.color = color;
-        this.lado = lado;
-    }
+class Hexagon(Figure):
+    def __init__(self, color: str, side: float):
+        super().__init__(color)
+        self.side = side
 
-    @Override
-    public String getColor() {
-        return color;
-    }
+    def perimeter(self) -> float:
+        return 6 * self.side
 
-    @Override
-    public double perimetro() {
-        return 6 * lado;
-    }
+    def area(self) -> float:
+        return (3 * math.sqrt(3) / 2) * self.side ** 2
 
-    @Override
-    public double area() {
-        return (3 * Math.sqrt(3) / 2) * lado * lado;
-    }
-}
+def main():
+    shapes = [
+        Triangle("red", 3, 4, 5),
+        Circle("blue", 10),
+        Rectangle("green", 4, 6),
+        Hexagon("yellow", 2)
+    ]
 
-public class Principal {
-    public static void main(String[] args) {
-        Figura[] figuras = {
-            new Triangulo("rojo", 3, 4, 5),
-            new Circulo("azul", 10),
-            new Rectangulo("verde", 4, 6),
-            new Hexagono("amarillo", 2)
-        };
+    for shape in shapes:
+        print(f"{shape.__class__.__name__} - Color: {shape.getColor()}, Perimeter: {shape.perimeter()}, Area: {shape.area()}")
 
-        for (Figura figura : figuras) {
-            System.out.println(figura.getClass().getSimpleName() + " - Color: " + figura.getColor() +
-                               ", Perímetro: " + figura.perimetro() + ", Área: " + figura.area());
-        }
-    }
-}
+if __name__ == "__main__":
+    main()
