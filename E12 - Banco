@@ -1,0 +1,128 @@
+class SaldoEfectivoInsuficiente(Exception):
+    pass
+
+class SaldoCuentaInsuficiente(Exception):
+    pass
+
+class Cuenta:
+    def __init__(self, numero_cuenta, pin, saldo=0):
+        self.numero_cuenta = numero_cuenta
+        self.pin = pin
+        self.saldo = saldo
+
+    def depositar(self, monto):
+        self.saldo += monto
+
+    def retirar(self, monto):
+        if self.saldo >= monto:
+            self.saldo -= monto
+        else:
+            raise SaldoCuentaInsuficiente("Saldo insuficiente en la cuenta.")
+
+    def transferir(self, monto, cuenta_destino):
+        if self.saldo >= monto:
+            self.saldo -= monto
+            cuenta_destino.depositar(monto)
+        else:
+            raise SaldoCuentaInsuficiente("Saldo insuficiente para la transferencia.")
+
+class CajeroAutomatico:
+    def __init__(self, efectivo_total=100000):
+        self.efectivo_total = efectivo_total
+        self.cuentas = {}
+
+    def agregar_cuenta(self, cuenta):
+        self.cuentas[cuenta.numero_cuenta] = cuenta
+
+    def autenticar(self, numero_cuenta, pin):
+        cuenta = self.cuentas.get(numero_cuenta)
+        if cuenta and cuenta.pin == pin:
+            return cuenta
+        else:
+            return None
+
+    def mostrar_saldo(self, cuenta):
+        print(f"Saldo de la cuenta {cuenta.numero_cuenta}: ${cuenta.saldo}")
+
+    def deposito_propio(self, cuenta, monto):
+        cuenta.depositar(monto)
+        print(f"Depósito exitoso. Nuevo saldo: ${cuenta.saldo}")
+
+    def deposito_otras_cuentas(self, cuenta_destino, monto):
+        cuenta_destino.depositar(monto)
+        print(f"Depósito a la cuenta {cuenta_destino.numero_cuenta} exitoso. Nuevo saldo: ${cuenta_destino.saldo}")
+
+    def transferencia(self, cuenta_origen, cuenta_destino, monto):
+        cuenta_origen.transferir(monto, cuenta_destino)
+        print(f"Transferencia exitosa. Nuevo saldo de la cuenta {cuenta_origen.numero_cuenta}: ${cuenta_origen.saldo}")
+
+    def retiro_efectivo(self, cuenta, monto):
+        if self.efectivo_total >= monto:
+            cuenta.retirar(monto)
+            self.efectivo_total -= monto
+            print(f"Retiro exitoso. Nuevo saldo de la cuenta {cuenta.numero_cuenta}: ${cuenta.saldo}")
+        else:
+            raise SaldoEfectivoInsuficiente("Saldo insuficiente en el cajero.")
+
+def main():
+    cajero = CajeroAutomatico()
+
+    cuenta1 = Cuenta("12345", "1111", 5000)
+    cuenta2 = Cuenta("67890", "2222", 3000)
+
+    numero_cuenta = input("Ingrese su número de cuenta: ")
+    pin = input("Ingrese su PIN: ")
+    cuenta = cajero.autenticar(numero_cuenta, pin)
+
+    if cuenta:
+        print("Autenticación exitosa.")
+        while True:
+            print("\nOpciones:")
+            print("1. Mostrar saldo")
+            print("2. Depositar a cuenta propia")
+            print("3. Depositar a otras cuentas")
+            print("4. Transferencia a otras cuentas")
+            print("5. Retiro de efectivo")
+            print("6. Salir")
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == "1":
+                cajero.mostrar_saldo(cuenta)
+            elif opcion == "2":
+                monto = float(input("Ingrese el monto a depositar: "))
+                cajero.deposito_propio(cuenta, monto)
+            elif opcion == "3":
+                cuenta_destino_num = input("Ingrese el número de cuenta destino: ")
+                cuenta_destino = cajero.cuentas.get(cuenta_destino_num)
+                if cuenta_destino:
+                    monto = float(input("Ingrese el monto a depositar: "))
+                    cajero.deposito_otras_cuentas(cuenta_destino, monto)
+                else:
+                    print("Cuenta destino no encontrada.")
+            elif opcion == "4":
+                cuenta_destino_num = input("Ingrese el número de cuenta destino: ")
+                cuenta_destino = cajero.cuentas.get(cuenta_destino_num)
+                if cuenta_destino:
+                    monto = float(input("Ingrese el monto a transferir: "))
+                    try:
+                        cajero.transferencia(cuenta, cuenta_destino, monto)
+                    except SaldoCuentaInsuficiente as e:
+                        print(e)
+                else:
+                    print("Cuenta destino no encontrada.")
+            elif opcion == "5":
+                monto = float(input("Ingrese el monto a retirar: "))
+                try:
+                    cajero.retiro_efectivo(cuenta, monto)
+                except (SaldoCuentaInsuficiente, SaldoEfectivoInsuficiente) as e:
+                    print(e)
+            elif opcion == "6":
+                print("Gracias por usar el cajero automático.")
+                break
+            else:
+                print("Opción no válida.")
+    else:
+        print("Autenticación fallida. Número de cuenta o PIN incorrecto.")
+
+if __name__ == "__main__":
+    main()
